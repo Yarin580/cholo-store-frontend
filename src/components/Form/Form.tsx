@@ -9,6 +9,7 @@ export interface FormField {
   className?: string;
   fullWidth?: boolean;
   resetOnSubmit?: boolean;
+  placeholder?: string;
 }
 
 interface FormProps {
@@ -28,47 +29,46 @@ const GenericForm: React.FC<FormProps> = ({
   className = "",
   validateField,
 }) => {
-  const [formData, setFormData] = useState({});
-  const [errors, setErrors] = useState({});
-  const [touched, setTouched] = useState({});
+  const [formData, setFormData] = useState<any>({});
+  const [errors, setErrors] = useState<any>({});
+  const [touched, setTouched] = useState<any>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [submitStatus, setSubmitStatus] = useState<string | null>(null);
 
   // אתחול ערכים התחלתיים
   useState(() => {
-    const initialData = {};
+    const initialData: any = {};
     fields.forEach((field) => {
       initialData[field.name] = field.initialValue || "";
     });
     setFormData(initialData);
-  }, []);
+  });
 
-  const handleChange = (e) => {
+  const handleChange = (e: any) => {
     const { name, value } = e.target;
-    setFormData((prev) => ({
+    setFormData((prev: any) => ({
       ...prev,
       [name]: value,
     }));
 
     if (touched[name] && validateField) {
       const error = validateField(name, value);
-      setErrors((prev) => ({
+      setErrors((prev: any) => ({
         ...prev,
         [name]: error,
       }));
     }
   };
 
-  const handleBlur = (e) => {
+  const handleBlur = (e: any) => {
     const { name, value } = e.target;
-    setTouched((prev) => ({
+    setTouched((prev: any) => ({
       ...prev,
       [name]: true,
     }));
 
     if (validateField) {
       const error = validateField(name, value);
-      setErrors((prev) => ({
+      setErrors((prev: any) => ({
         ...prev,
         [name]: error,
       }));
@@ -78,7 +78,7 @@ const GenericForm: React.FC<FormProps> = ({
   const validateForm = () => {
     if (!validateField) return true;
 
-    const newErrors = {};
+    const newErrors: any = {};
     fields.forEach((field) => {
       const error = validateField(field.name, formData[field.name]);
       if (error) newErrors[field.name] = error;
@@ -88,10 +88,9 @@ const GenericForm: React.FC<FormProps> = ({
     return Object.keys(newErrors).length === 0;
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e: any) => {
     e.preventDefault();
     setIsSubmitting(true);
-    setSubmitStatus(null);
 
     if (!validateForm()) {
       setIsSubmitting(false);
@@ -108,11 +107,10 @@ const GenericForm: React.FC<FormProps> = ({
 
     try {
       await onSubmit(formData);
-      setSubmitStatus("success");
 
       // איפוס הטופס אם נדרש
       if (fields.some((field) => field.resetOnSubmit === true)) {
-        const resetData = {};
+        const resetData: any = {};
         fields.forEach((field) => {
           resetData[field.name] =
             field.resetOnSubmit !== false
@@ -124,7 +122,7 @@ const GenericForm: React.FC<FormProps> = ({
         setErrors({});
       }
     } catch (error) {
-      setSubmitStatus("error");
+      console.log("error");
     } finally {
       setIsSubmitting(false);
     }
@@ -172,8 +170,8 @@ const GenericForm: React.FC<FormProps> = ({
                   value={formData[field.name] || ""}
                   onChange={handleChange}
                   onBlur={handleBlur}
-                  rows={field.rows || 5}
-                  placeholder={field.placeholder}
+                  rows={5}
+                  placeholder={field.placeholder || ""}
                   className={getInputClassName(field.name)}
                   required={field.required}
                 />
