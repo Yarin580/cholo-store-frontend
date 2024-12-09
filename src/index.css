@@ -1,0 +1,20 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+  font-family: "Gendis-Body-Font";
+  src: url("src/assets/fonts/GendisBody-Regular.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+:root,
+body,
+html {
+  font-family: "Gendis-Body-Font", sans-serif;
+  height: 100%;
+}
+
+.nav-link {
+  transition: color 0.3s ease-in-out;
+}

@@ -1,0 +1,12 @@
+.image-div {
+  height: 30vh;
+  /* background-image: url("/assets/desert.jpg");
+  background-size: 100% 100%;
+  background-repeat: no-repeat; */
+}
+
+@media (min-width: 768px) {
+  .image-div {
+    height: 100vh;
+  }
+}
