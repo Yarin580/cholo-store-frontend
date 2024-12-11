@@ -11,7 +11,6 @@ import CartPage from "./pages/CartPage/CartPage";
 import { CartProvider } from "./context/cartProvider";
 import SystemLoginPage from "./pages/System/SystemLoginPage/SystemLoginPage";
 import OrderSuccessPage from "./pages/OrderSuccessPage/OrderSuccessPage";
-import "react-toastify/dist/ReactToastify.css";
 
 function App() {
   return (

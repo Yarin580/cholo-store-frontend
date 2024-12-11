@@ -28,7 +28,7 @@ const CategoryPage: React.FC<CategoryPageProps> = ({ category_id }) => {
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* רשימת המוצרים */}
-        <div className="flex justify-center items-center">
+        <div className="flex justify-center items-center" dir="rtl">
           <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {products?.map((product, key) => {
               const cardItem: CardItem = {
@@ -36,6 +36,7 @@ const CategoryPage: React.FC<CategoryPageProps> = ({ category_id }) => {
                 name: product.name,
                 description: product.description,
                 sale_price: product.sale_price,
+                category_id: product.category_id,
                 original_price: product.original_price,
               };
 

@@ -51,8 +51,7 @@ const HomePage: React.FC = () => {
             scrollingUp ? "opacity-100" : "opacity-0"
           }`}
         >
-          <span className="text-4xl">Welcome to Cholo store</span>
-          <span className="text-2xl">Become a real men</span>
+          <span className="text-2xl md:text-6xl">Be Uniqe Be Cholo</span>
         </div>
       </div>
 
@@ -66,6 +65,7 @@ const HomePage: React.FC = () => {
               const cardItem: CardItem = {
                 id: product.id,
                 name: product.name,
+                category_id: product.category_id,
                 description: product.description,
                 sale_price: product.sale_price,
                 original_price: product.original_price,

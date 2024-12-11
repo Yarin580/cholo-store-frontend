@@ -4,7 +4,7 @@
 
 @font-face {
   font-family: "Gendis-Body-Font";
-  src: url("src/assets/fonts/GendisBody-Regular.ttf") format("truetype");
+  src: url("/assets/fonts/GendisBody-Regular.ttf") format("truetype");
   font-weight: normal;
   font-style: normal;
 }

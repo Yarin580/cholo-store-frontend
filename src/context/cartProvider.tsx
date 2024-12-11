@@ -6,6 +6,7 @@ export interface CartItem {
   id: string;
   name: string;
   price: number;
+  category_id: number;
   quantity: number;
   size: string;
 }
@@ -14,8 +15,8 @@ interface CartContextType {
   cart: CartItem[];
   isCartLoading: boolean;
   addToCart: (item: CartItem) => void;
-  removeFromCart: (itemId: string | number) => void;
-  removeQuantityFromItem: (itemId: string | number) => void;
+  removeFromCart: (itemId: string | number, itemSize: string) => void;
+  removeQuantityFromItem: (itemId: string | number, itemSize: string) => void;
   clearCart: () => void;
 }
 
@@ -50,10 +51,12 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({
   }, []);
 
   const addToCart = (item: CartItem) => {
-    const existingItem = cart.find((cartItem) => cartItem.id === item.id);
+    const existingItem = cart.find(
+      (cartItem) => cartItem.id === item.id && cartItem.size === item.size
+    );
     if (existingItem) {
       const updatedCart = cart.map((cartItem) =>
-        cartItem.id === item.id
+        cartItem.id === item.id && cartItem.size === item.size
           ? { ...cartItem, quantity: cartItem.quantity + item.quantity }
           : cartItem
       );
@@ -63,15 +66,22 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({
     }
   };
 
-  const removeFromCart = (itemId: string | number) => {
-    const updatedCart = cart.filter((cartItem) => cartItem.id !== itemId);
+  const removeFromCart = (itemId: string | number, itemSize: string) => {
+    const updatedCart = cart.filter(
+      (cartItem) =>
+        cartItem.id !== itemId ||
+        (cartItem.id === itemId && cartItem.size !== itemSize)
+    );
     saveCart(updatedCart);
   };
 
-  const removeQuantityFromItem = (itemId: string | number) => {
+  const removeQuantityFromItem = (
+    itemId: string | number,
+    itemSize: string
+  ) => {
     const updatedCart = cart
       .map((cartItem) =>
-        cartItem.id === itemId
+        cartItem.id === itemId && cartItem.size === itemSize
           ? { ...cartItem, quantity: cartItem.quantity - 1 }
           : cartItem
       )

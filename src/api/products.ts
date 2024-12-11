@@ -6,6 +6,7 @@ export interface Product {
   description: string;
   original_price: number;
   sale_price: number;
+  category_id: number;
   sizes: ProductSize[] | [];
 }
 

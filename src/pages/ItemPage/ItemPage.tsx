@@ -16,6 +16,7 @@ const ItemPage: React.FC = () => {
   const { addToCart } = useCart();
 
   const { product } = useGetProduct(id);
+  console.log(product);
 
   const increaseQuantity = () => setQuantity((prev) => prev + 1);
   const decreaseQuantity = () =>
@@ -33,6 +34,7 @@ const ItemPage: React.FC = () => {
     const newItem: CartItem = {
       id: product.id,
       name: product.name,
+      category_id: product.category_id,
       price: finalPrice,
       quantity: quantity,
       size: selectedSize,
@@ -51,7 +53,9 @@ const ItemPage: React.FC = () => {
             {/* תמונת המוצר */}
             <div className="relative aspect-square">
               <img
-                src={`/assets/shirts/${product?.id}.jpg`}
+                src={`https://cholo-store.s3.eu-north-1.amazonaws.com/${
+                  import.meta.env.VITE_APP_ENV
+                }/collections/${product?.category_id}/${product?.id}.jpg`}
                 alt="תמונת המוצר"
                 className="w-full h-full object-cover"
               />

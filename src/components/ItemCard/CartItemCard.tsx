@@ -18,7 +18,9 @@ const CartItemCard: React.FC<CartCardProps> = ({ cartItem }) => {
     <div key={cartItem.id} className="p-4">
       <div className="flex gap-4">
         <img
-          src={`/assets/shirts/${cartItem.id}.jpg`}
+          src={`https://cholo-store.s3.eu-north-1.amazonaws.com/${
+            import.meta.env.VITE_APP_ENV
+          }/collections/${cartItem.category_id}/${cartItem.id}.jpg`}
           onClick={() =>
             navigate(`/collections/shirts/${cartItem.id}`, { replace: true })
           }
@@ -33,7 +35,7 @@ const CartItemCard: React.FC<CartCardProps> = ({ cartItem }) => {
               variant="outlined"
               className="text-red-500 hover:text-red-600 hover:bg-red-50"
               onClick={() => {
-                removeFromCart(cartItem.id);
+                removeFromCart(cartItem.id, cartItem.size);
               }}
             >
               <Trash2 className="h-4 w-4" />
@@ -49,7 +51,9 @@ const CartItemCard: React.FC<CartCardProps> = ({ cartItem }) => {
               <div className="flex items-center gap-2">
                 <button
                   className="h-8 w-8"
-                  onClick={() => removeQuantityFromItem(cartItem.id)}
+                  onClick={() =>
+                    removeQuantityFromItem(cartItem.id, cartItem.size)
+                  }
                 >
                   <Minus className="h-4 w-4" />
                 </button>

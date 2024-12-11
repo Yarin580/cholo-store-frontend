@@ -8,11 +8,12 @@ interface CardProps {
 
 const Card: React.FC<CardProps> = ({ cardItem }) => {
   const navigate = useNavigate();
+  console.log(cardItem);
   return (
     <>
       <div
         key={cardItem.id}
-        className="bg-white rounded-lg shadow-sm overflow-hidden hover:shadow-md transition-shadow hover:cursor-pointer"
+        className="bg-white rounded-lg shadow-md shadow-gray-200 overflow-hidden hover:shadow-lg transition-shadow hover:cursor-pointer"
         dir="rtl"
         onClick={() => {
           navigate(`/collections/shirts/${cardItem.id}`);
@@ -21,7 +22,9 @@ const Card: React.FC<CardProps> = ({ cardItem }) => {
       >
         <div className="aspect-square relative">
           <img
-            src={`/assets/shirts/${cardItem.id}.jpg`}
+            src={`https://cholo-store.s3.eu-north-1.amazonaws.com/${
+              import.meta.env.VITE_APP_ENV
+            }/collections/${cardItem.category_id}/${cardItem.id}.jpg`}
             alt={cardItem.name}
             className="w-full h-full object-cover"
           />
