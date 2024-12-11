@@ -19,6 +19,7 @@ function App() {
         <NavBar />
         <div className="flex-1">
           <Routes>
+            {/* routes */}
             <Route path="/" element={<HomePage />} />
             <Route path="/collections/:categoryID" element={<CategoryPage />} />
             <Route path="/collections/shirts/:id" element={<ItemPage />} />
